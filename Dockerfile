@@ -1,5 +1,5 @@
 # Build stage
-FROM node:20-alpine3.20 AS build 
+FROM node:20-alpine3.23.3 AS build 
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -7,7 +7,7 @@ COPY . .
 RUN npm run build
 
 # Production stage
-FROM nginx:1.27-alpine3.20
+FROM nginx:1.27-alpine3.23.3
 COPY --from=build /app/dist /usr/share/nginx/html
 # Add nginx configuration if needed
 # COPY nginx.conf /etc/nginx/conf.d/default.conf
